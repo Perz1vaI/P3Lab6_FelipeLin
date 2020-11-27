@@ -5,7 +5,6 @@ Persona::Persona(string nombre, string apellido,string contra,int llave) {
 	this->apellido = apellido;
 	this->contra = contra;
 	this->llave = llave;
-
 }
 
 string Persona::getNombre(){
@@ -22,6 +21,10 @@ string Persona::getPass(){
 
 vector<string> Persona::getLista(){
 	return Lista_Mensaje;
+}
+
+void Persona::addMensaje(string mensaje){
+	this->Lista_Mensaje.push_back(mensaje);
 }
 
 Persona::Persona(const Persona& orig) {

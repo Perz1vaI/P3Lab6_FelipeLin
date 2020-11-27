@@ -19,8 +19,11 @@
 
 using namespace std;
 
+string cifradocesar_adelante(string, int, int, int);
+string cifradocesar_atras(string, int, int, int);
+
 int main(int argc, char** argv) {
-    vector<Persona> lista_persona;
+    vector<Persona*> lista_persona;
     int menu;
     cout << "1. Registrarse\n2. Ingresar\n3. Salir\n";
     cout << "Ingrese la opcion: ";
@@ -44,18 +47,9 @@ int main(int argc, char** argv) {
 
                 llave = rand() % 1 + 15;
 
-                Persona p(nombre, apellido, pass, llave);
+                Persona* p = new Persona(nombre, apellido, pass, llave);
 
                 lista_persona.push_back(p);
-
-                cout << "nombre:: " << lista_persona.at(0).getNombre() << endl;
-                cout << "pass:: " << lista_persona.at(0).getPass() << endl;
-                cout << "llave:: " << lista_persona.at(0).getLlave() << endl;
-
-
-
-
-
 
                 break;
             }
@@ -72,12 +66,9 @@ int main(int argc, char** argv) {
                 cin >> login_contra;
 
 
-                cout << " tamanio : " << lista_persona.size() << endl;
                 for (int i = 0; i < lista_persona.size(); i++) {
-                    cout << "i=" << i << endl;
-                    cout << "nombre: " << lista_persona.at(i).getNombre() << endl;
-                    cout << "contra: " << lista_persona.at(i).getPass() << endl;
-                    if (lista_persona.at(i).getNombre() == login_name && lista_persona.at(i).getPass() == login_contra) {
+
+                    if (lista_persona.at(i)->getNombre() == login_name && lista_persona.at(i)->getPass() == login_contra) {
                         int menu;
                         cout << "1. Enviar mensaje\n2. Ver mensaje\n3. Ver mi llave\n4. Salir\n";
                         cout << "Ingrese la opcion: ";
@@ -86,7 +77,6 @@ int main(int argc, char** argv) {
                             switch (menu) {
                                 case 1:
                                 {
-                                    cout << "si entras aqui sos el puto amo";
 
                                     break;
                                 }
@@ -121,4 +111,27 @@ int main(int argc, char** argv) {
 
 
 }
+
+string cifradocesar_adelante(string texto, int desplazamiento, int tamanio, int aux) {
+    for (int i = 0; i < tamanio; i++) {
+        aux = texto[i];
+        aux = aux + desplazamiento;
+        texto[i] = aux;
+    }
+
+    return texto;
+}
+
+string cifradocesar_atras(string texto, int desplazamiento, int tamanio, int aux) {
+    for (int i = 0; i < tamanio; i++) {
+        aux = texto[i];
+        aux = aux - desplazamiento;
+        texto[i] = aux;
+    }
+
+    return texto;
+
+}
+
+
 

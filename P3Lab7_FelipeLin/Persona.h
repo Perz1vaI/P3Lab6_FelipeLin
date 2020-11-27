@@ -18,6 +18,7 @@ public:
     int getLlave();
 	string getPass();
 	vector<string> getLista();
+	void addMensaje(string);
 
 
 private:
