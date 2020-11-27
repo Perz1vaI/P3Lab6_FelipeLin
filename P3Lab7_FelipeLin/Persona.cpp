@@ -12,12 +12,12 @@ string Persona::getNombre(){
 	return nombre;
 }
 
-string Persona::getLlave(){
-	return nombre;
+int Persona::getLlave(){
+	return llave;
 }
 
 string Persona::getPass(){
-	return nombre;
+	return contra;
 }
 
 vector<string> Persona::getLista(){

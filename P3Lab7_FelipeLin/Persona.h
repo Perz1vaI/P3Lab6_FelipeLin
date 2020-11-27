@@ -15,7 +15,7 @@ public:
 
 	Persona(string,string,string,int);
 	string getNombre();
-    string getLlave();
+    int getLlave();
 	string getPass();
 	vector<string> getLista();
 
