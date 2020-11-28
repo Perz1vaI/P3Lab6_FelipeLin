@@ -21,7 +21,8 @@ using namespace std;
 
 char cifradocesar_adelante(char, int);
 char cifradocesar_atras(char, int);
-string recursivo(string, int,int);
+string recursivo(string, int, int);
+string recursivo_revez(string, int, int);
 
 int main(int argc, char** argv) {
     vector<Persona*> lista_persona;
@@ -47,7 +48,7 @@ int main(int argc, char** argv) {
                 cin >> pass;
 
                 llave = rand() % 4 + 1;
-                
+
                 Persona* p = new Persona(nombre, apellido, pass, llave);
 
                 lista_persona.push_back(p);
@@ -95,9 +96,8 @@ int main(int argc, char** argv) {
                                     cin >> mensaje;
 
                                     string mensaje_codificado;
-                                    
-                                    cout << "llave : " << lista_persona[persona_selec]->getLlave() << endl; 
-                                    mensaje_codificado = recursivo(mensaje, lista_persona[persona_selec]->getLlave(),0);
+
+                                    mensaje_codificado = recursivo(mensaje, lista_persona[persona_selec]->getLlave(), 0);
 
                                     lista_persona[persona_enviar]->addMensaje(mensaje_codificado);
 
@@ -116,6 +116,19 @@ int main(int argc, char** argv) {
                                         }
                                         cout << endl;
                                     }
+                                    int selec_mensaje;
+                                    cout << "Seleccione el mensaje: " << endl;
+                                    cin >> selec_mensaje;
+
+                                    string mensaje_decodificado;
+
+
+                                    mensaje_decodificado = recursivo(lista_persona[selec_mensaje]->getLista().at(0), lista_persona[selec_mensaje]->getLlave(), 0);
+
+                                    cout << "El mensaje decodificado: " << endl;
+                                    cout << "[TEXT]:" << mensaje_decodificado << endl;
+
+
 
                                     break;
                                 }
@@ -158,17 +171,17 @@ int main(int argc, char** argv) {
     }
 
 
-    
+
 
 }
 
-string recursivo(string msj, int llave,int contador_llave) {
-    
+string recursivo(string msj, int llave, int contador_llave) {
+
     bool cambio = false;
     if (llave == 0) {
         return msj;
     } else {
-        for (int i = 0; i < msj.size(); i+=llave) {
+        for (int i = 0; i < msj.size(); i += llave) {
 
             if (!cambio) {
                 for (int j = 0; j < llave; j++) {
@@ -189,7 +202,40 @@ string recursivo(string msj, int llave,int contador_llave) {
 
         }
 
-        recursivo(msj, llave - 1,contador_llave);
+        recursivo(msj, llave - 1, contador_llave);
+    }
+    return msj;
+}
+
+string recursivo_revez(string msj, int llave, int contador_llave) {
+
+    bool cambio = false;
+    if (llave == 0) {
+        return msj;
+    } else {
+        for (int i = 0; i < msj.size(); i += llave) {
+
+            if (!cambio) {
+                for (int j = 0; j < llave; j++) {
+                    msj[contador_llave] = cifradocesar_atras(msj[contador_llave], llave);
+                    contador_llave++;
+                }
+                cambio = true;
+
+
+            } else {
+                for (int j = 0; j < llave; j++) {
+                    msj[contador_llave] = cifradocesar_adelante(msj[contador_llave], llave);
+                    contador_llave++;
+
+                }
+
+                cambio = false;
+            }
+
+        }
+
+        recursivo(msj, llave - 1, contador_llave);
     }
     return msj;
 }
