@@ -110,7 +110,7 @@ int main(int argc, char** argv) {
                                     cout << "*VER MENSAJES*" << endl;
 
                                     for (int i = 0; i < lista_persona.size(); i++) {
-                                        cout << i + 1 << ". De: " << lista_persona[persona_selec]->getNombre() << " ";
+                                        cout << i << ". De: " << lista_persona[persona_selec]->getNombre() << " ";
                                         for (int i = 0; i < lista_persona[persona_selec]->getLista().size(); i++) {
                                             cout << lista_persona[persona_selec]->getLista().at(i);
                                         }
@@ -126,7 +126,7 @@ int main(int argc, char** argv) {
                                     mensaje_decodificado = recursivo(lista_persona[selec_mensaje]->getLista().at(0), lista_persona[selec_mensaje]->getLlave(), 0);
 
                                     cout << "El mensaje decodificado: " << endl;
-                                    cout << "[TEXT]:" << mensaje_decodificado << endl;
+                                    cout << "[TEXT]: " << mensaje_decodificado << endl;
 
 
 
